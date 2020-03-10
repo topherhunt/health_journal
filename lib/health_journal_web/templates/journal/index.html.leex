@@ -22,29 +22,29 @@
           <div class="col">
             <div class="u-card">
               <%= label f, :sleep %>
-              <%= textarea f, :sleep, class: "form-control", phx_debounce: 1000 %>
+              <%= textarea f, :sleep, class: "form-control", phx_debounce: 1000, phx_update: "ignore" %>
             </div>
             <div class="u-card">
               <%= label f, :energy, "Energy level" %>
-              <%= textarea f, :energy, class: "form-control", phx_debounce: 1000 %>
+              <%= textarea f, :energy, class: "form-control", phx_debounce: 1000, phx_update: "ignore" %>
             </div>
             <div class="u-card">
               <%= label f, :comfort, "Comfort & pain" %>
-              <%= textarea f, :comfort, class: "form-control", phx_debounce: 1000 %>
+              <%= textarea f, :comfort, class: "form-control", phx_debounce: 1000, phx_update: "ignore" %>
             </div>
             <div class="u-card">
               <%= label f, :exercise %>
-              <%= textarea f, :exercise, class: "form-control", phx_debounce: 1000 %>
+              <%= textarea f, :exercise, class: "form-control", phx_debounce: 1000, phx_update: "ignore" %>
             </div>
           </div>
           <div class="col">
             <div class="u-card">
               <%= label f, :food, "Food & drink" %>
-              <%= textarea f, :food, class: "form-control", rows: 10, phx_debounce: 1000 %>
+              <%= textarea f, :food, class: "form-control", rows: 10, phx_debounce: 1000, phx_update: "ignore" %>
             </div>
             <div class="u-card">
               <%= label f, :vitamins, "Vitamins & medicine" %>
-              <%= textarea f, :vitamins, class: "form-control", phx_debounce: 1000 %>
+              <%= textarea f, :vitamins, class: "form-control", phx_debounce: 1000, phx_update: "ignore" %>
             </div>
           </div>
         </div>
