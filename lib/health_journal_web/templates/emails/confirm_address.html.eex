@@ -1,4 +1,4 @@
-<h1>Worldview Journeys: <%= gettext "Please confirm your address" %></h1>
+<h1>HealthJournal: <%= gettext "Please confirm your address" %></h1>
 
 <p><%= gettext "Please click the link below to confirm your email address for your account at wvtest.com." %></p>
 

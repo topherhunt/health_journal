@@ -17,7 +17,7 @@ defmodule HealthJournal.Emails do
 
     standard_email()
     |> to(email)
-    |> subject("Worldview Journeys: #{gettext "Please confirm your address"}")
+    |> subject("HealthJournal: #{gettext "Please confirm your address"}")
     |> render("confirm_address.html", url: url)
   end
 
@@ -29,7 +29,7 @@ defmodule HealthJournal.Emails do
 
     standard_email()
     |> to(user.email)
-    |> subject("Worldview Journeys: #{gettext "Use this link to reset your password"}")
+    |> subject("HealthJournal: #{gettext "Use this link to reset your password"}")
     |> render("reset_password.html", url: url)
   end
 
@@ -39,7 +39,7 @@ defmodule HealthJournal.Emails do
 
   defp standard_email do
     new_email()
-    |> from({"Worldview Journeys", "noreply@worldviewjourneys.com"})
+    |> from({"HealthJournal", "noreply@worldviewjourneys.com"})
     |> put_html_layout({HealthJournalWeb.LayoutView, "email.html"})
   end
 end
