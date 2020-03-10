@@ -1,9 +1,9 @@
-defmodule Vanilla.MixProject do
+defmodule HealthJournal.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :vanilla,
+      app: :health_journal,
       version: "0.1.0",
       elixir: "1.8.2",
       elixirc_paths: elixirc_paths(Mix.env()),
@@ -19,7 +19,7 @@ defmodule Vanilla.MixProject do
   # Type `mix help compile.app` for more information.
   def application do
     [
-      mod: {Vanilla.Application, []},
+      mod: {HealthJournal.Application, []},
       extra_applications: [:logger, :runtime_tools]
     ]
   end

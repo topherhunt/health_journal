@@ -1,4 +1,4 @@
-defmodule Vanilla.Repo.Migrations.CreateUsers do
+defmodule HealthJournal.Repo.Migrations.CreateUsers do
   use Ecto.Migration
 
   def change do

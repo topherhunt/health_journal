@@ -1,10 +1,10 @@
-defmodule VanillaWeb.ConnHelpers do
+defmodule HealthJournalWeb.ConnHelpers do
   use ExUnit.CaseTemplate
   use Phoenix.ConnTest
-  alias Vanilla.Factory
-  alias VanillaWeb.Router.Helpers, as: Routes
+  alias HealthJournal.Factory
+  alias HealthJournalWeb.Router.Helpers, as: Routes
 
-  @endpoint VanillaWeb.Endpoint
+  @endpoint HealthJournalWeb.Endpoint
 
   def login(conn, user) do
     # Plug.Conn.assign(conn, :current_user, user)

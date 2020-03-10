@@ -1,4 +1,4 @@
-defmodule Vanilla.Repo.Migrations.CreateLoginTries do
+defmodule HealthJournal.Repo.Migrations.CreateLoginTries do
   use Ecto.Migration
 
   def change do

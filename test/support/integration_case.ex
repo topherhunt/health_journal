@@ -1,27 +1,27 @@
-defmodule VanillaWeb.IntegrationCase do
+defmodule HealthJournalWeb.IntegrationCase do
   use ExUnit.CaseTemplate
 
   using do
     quote do
       use Phoenix.ConnTest
       use Hound.Helpers # See https://github.com/HashNuke/hound for usage info
-      import Vanilla.EmailHelpers
-      import VanillaWeb.IntegrationHelpers
-      alias VanillaWeb.Router.Helpers, as: Routes
-      alias Vanilla.Factory
+      import HealthJournal.EmailHelpers
+      import HealthJournalWeb.IntegrationHelpers
+      alias HealthJournalWeb.Router.Helpers, as: Routes
+      alias HealthJournal.Factory
 
-      @endpoint VanillaWeb.Endpoint
+      @endpoint HealthJournalWeb.Endpoint
     end
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Vanilla.Repo)
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(HealthJournal.Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(Vanilla.Repo, {:shared, self()})
+      Ecto.Adapters.SQL.Sandbox.mode(HealthJournal.Repo, {:shared, self()})
     end
 
-    # Vanilla.DataHelpers.empty_database()
+    # HealthJournal.DataHelpers.empty_database()
     ensure_driver_running()
     System.put_env("SUPERADMIN_EMAILS", "superadmin@example.com")
     {:ok, conn: Phoenix.ConnTest.build_conn()}

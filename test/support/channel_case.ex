@@ -1,4 +1,4 @@
-defmodule VanillaWeb.ChannelCase do
+defmodule HealthJournalWeb.ChannelCase do
   @moduledoc """
   This module defines the test case to be used by
   channel tests.
@@ -21,15 +21,15 @@ defmodule VanillaWeb.ChannelCase do
       use Phoenix.ChannelTest
 
       # The default endpoint for testing
-      @endpoint VanillaWeb.Endpoint
+      @endpoint HealthJournalWeb.Endpoint
     end
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Vanilla.Repo)
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(HealthJournal.Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(Vanilla.Repo, {:shared, self()})
+      Ecto.Adapters.SQL.Sandbox.mode(HealthJournal.Repo, {:shared, self()})
     end
 
     :ok

@@ -1,15 +1,15 @@
-defmodule VanillaWeb.IntegrationHelpers do
+defmodule HealthJournalWeb.IntegrationHelpers do
   use ExUnit.CaseTemplate
   use Hound.Helpers # See https://github.com/HashNuke/hound for docs
-  alias Vanilla.Factory
-  alias VanillaWeb.Router.Helpers, as: Routes
+  alias HealthJournal.Factory
+  alias HealthJournalWeb.Router.Helpers, as: Routes
 
   #
   # High-level
   #
 
   def login(_conn, user) do
-    navigate_to Routes.auth_url(VanillaWeb.Endpoint, :login)
+    navigate_to Routes.auth_url(HealthJournalWeb.Endpoint, :login)
     find_element("#user_email") |> fill_field(user.email)
     find_element("#user_password") |> fill_field("password")
     find_element(~s(button[type="submit"])) |> click()

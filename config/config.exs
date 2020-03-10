@@ -15,14 +15,14 @@ end
 # Automatically load sensitive env variables if available (for dev and test)
 if File.exists?("config/secrets.exs"), do: import_config("secrets.exs")
 
-config :vanilla, ecto_repos: [Vanilla.Repo]
+config :health_journal, ecto_repos: [HealthJournal.Repo]
 
 # Configures the endpoint
-config :vanilla, VanillaWeb.Endpoint,
+config :health_journal, HealthJournalWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: H.env!("SECRET_KEY_BASE"),
-  render_errors: [view: VanillaWeb.ErrorView, accepts: ~w(html json)],
-  pubsub: [name: Vanilla.PubSub, adapter: Phoenix.PubSub.PG2]
+  render_errors: [view: HealthJournalWeb.ErrorView, accepts: ~w(html json)],
+  pubsub: [name: HealthJournal.PubSub, adapter: Phoenix.PubSub.PG2]
 
 # Configures Elixir's Logger
 config :logger, :console, format: "$time $metadata[$level] $message\n"
@@ -32,9 +32,9 @@ config :phoenix, :json_library, Jason
 
 # By default, sent emails are captured in a local process for later inspection.
 # Example:
-#   Vanilla.AdminEmails.unknown_heats() |> Vanilla.Mailer.deliver_now()
+#   HealthJournal.AdminEmails.unknown_heats() |> HealthJournal.Mailer.deliver_now()
 #   Bamboo.SentEmail.all() # => a list having one %Bamboo.Email{} struct
-config :vanilla, Vanilla.Mailer, adapter: Bamboo.LocalAdapter
+config :health_journal, HealthJournal.Mailer, adapter: Bamboo.LocalAdapter
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
