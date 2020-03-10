@@ -44,10 +44,11 @@ defmodule HealthJournalWeb.JournalIndexLive do
     day_id = Map.fetch!(day_params, "id")
     day = Day.filter(user: socket.assigns.user, id: day_id) |> Repo.one!()
     day = Data.update_day!(day, day_params, :owner)
+    # Update the changeset just to keep the state consistent.
+    # (But the form elements are phx-update="ignore" so this is a bit redundant.)
     changeset = Day.changeset(day, %{}, :owner)
     changesets = socket.assigns.changesets |> Map.put(day.date, changeset)
     socket = assign(socket, days: load_days(socket), changesets: changesets)
-    # I don't think we need to update the changeset.
     {:noreply, socket}
   end
 
