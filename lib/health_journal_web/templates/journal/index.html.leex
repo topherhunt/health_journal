@@ -1,0 +1,95 @@
+<div class="float-right">
+  <%= f = form_for :day, "#", [phx_submit: "add-date"] %>
+    <%= date_input f, :date, class: "form-control", style: "width: 11em; display: inline-block;" %>
+    <%= submit "Add entry for this date", class: "btn btn-success btn-sm" %>
+  </form>
+</div>
+
+<h1>Journal</h1>
+
+<%= for day <- @days do %>
+  <%= if day.date in Map.keys(@changesets) do %>
+
+    <div class="journal-date journal-date--editing">
+      <%= f = form_for @changesets[day.date], "#", [phx_change: "update-date"] %>
+        <%= hidden_input f, :id %>
+        <div>
+          <strong><%= day.date %></strong> &nbsp;
+          <%= link "close", to: "#", phx_click: "close-edit-date", phx_value_date: day.date %> &nbsp;
+          <span class="em text-muted">last updated <%= day.updated_at %></span>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="u-card">
+              <%= label f, :sleep %>
+              <%= textarea f, :sleep, class: "form-control", phx_debounce: 1000 %>
+            </div>
+            <div class="u-card">
+              <%= label f, :energy, "Energy level" %>
+              <%= textarea f, :energy, class: "form-control", phx_debounce: 1000 %>
+            </div>
+            <div class="u-card">
+              <%= label f, :comfort, "Comfort & pain" %>
+              <%= textarea f, :comfort, class: "form-control", phx_debounce: 1000 %>
+            </div>
+            <div class="u-card">
+              <%= label f, :exercise %>
+              <%= textarea f, :exercise, class: "form-control", phx_debounce: 1000 %>
+            </div>
+          </div>
+          <div class="col">
+            <div class="u-card">
+              <%= label f, :food, "Food & drink" %>
+              <%= textarea f, :food, class: "form-control", rows: 10, phx_debounce: 1000 %>
+            </div>
+            <div class="u-card">
+              <%= label f, :vitamins, "Vitamins & medicine" %>
+              <%= textarea f, :vitamins, class: "form-control", phx_debounce: 1000 %>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+
+  <% else %>
+
+    <%# Non-editable version %>
+    <div class="journal-date journal-date--static">
+      <div>
+        <strong><%= day.date %></strong> &nbsp;
+        <%= link "edit", to: "#", phx_click: "edit-date", phx_value_date: day.date %>
+      </div>
+      <div class="row" style="font-size: 0.8em;">
+        <div class="col">
+          <div class="day-section--static">
+            <div><strong>Sleep</strong></div>
+            <div><%= day.sleep |> newlines_to_bullets() %></div>
+          </div>
+          <div class="day-section--static">
+            <div><strong>Energy level</strong></div>
+            <div><%= day.energy |> newlines_to_bullets() %></div>
+          </div>
+          <div class="day-section--static">
+            <div><strong>Comfort & pain</strong></div>
+            <div><%= day.comfort |> newlines_to_bullets() %></div>
+          </div>
+          <div class="day-section--static">
+            <div><strong>Exercise</strong></div>
+            <div><%= day.exercise |> newlines_to_bullets() %></div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="day-section--static">
+            <div><strong>Food & drink</strong></div>
+            <div><%= day.food |> newlines_to_bullets() %></div>
+          </div>
+          <div class="day-section--static">
+            <div><strong>Vitamins & medicine</strong></div>
+            <div><%= day.vitamins |> newlines_to_bullets() %></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <% end %>
+<% end %>

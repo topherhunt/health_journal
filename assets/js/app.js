@@ -19,4 +19,5 @@ window.$ = $
 // Local files can be imported directly using relative paths, for example:
 // import socket from "./socket"
 
+import "./liveview"
 import "./jquery_utilities"

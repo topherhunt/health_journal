@@ -24,6 +24,7 @@ defmodule HealthJournalWeb do
       import Plug.Conn
       import HealthJournalWeb.Gettext
       import HealthJournalWeb.SentryPlugs
+      import Phoenix.LiveView.Controller
       alias HealthJournalWeb.Router.Helpers, as: Routes
       alias HealthJournal.Repo
     end
@@ -44,6 +45,7 @@ defmodule HealthJournalWeb do
       import HealthJournalWeb.ErrorHelpers
       import HealthJournalWeb.Gettext
       import HealthJournalWeb.FormHelpers
+      import Phoenix.LiveView.Helpers
       alias HealthJournalWeb.Router.Helpers, as: Routes
     end
   end
@@ -53,6 +55,7 @@ defmodule HealthJournalWeb do
       use Phoenix.Router
       import Plug.Conn
       import Phoenix.Controller
+      import Phoenix.LiveView.Router
     end
   end
 

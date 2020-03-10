@@ -1,12 +1,14 @@
 defmodule HealthJournalWeb.Router do
   use HealthJournalWeb, :router
   use Plug.ErrorHandler # for Rollbax
+  import Phoenix.LiveView.Router
   import HealthJournalWeb.AuthPlugs, only: [load_current_user: 2]
 
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
-    plug :fetch_flash
+    # plug :fetch_flash # Apparently fetch_live_flash makes this obsolete?
+    plug :fetch_live_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
     plug :load_current_user
@@ -42,6 +44,8 @@ defmodule HealthJournalWeb.Router do
     get "/account/edit", UserController, :edit
     patch "/account/update", UserController, :update
     patch "/account/update_email", UserController, :update_email
+
+    resources "/journal", JournalController, only: [:index]
   end
 
   # Other scopes may use custom stacks.

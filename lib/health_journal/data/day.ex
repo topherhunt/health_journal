@@ -7,12 +7,12 @@ defmodule HealthJournal.Data.Day do
   schema "days" do
     belongs_to :user, Data.User
     field :date, :date
-    field :sleep, :text
-    field :energy, :text
-    field :comfort, :text
-    field :food, :text
-    field :vitamins, :text
-    field :exercise, :text
+    field :sleep, :string
+    field :energy, :string
+    field :comfort, :string
+    field :food, :string
+    field :vitamins, :string
+    field :exercise, :string
     timestamps()
   end
 
@@ -32,4 +32,6 @@ defmodule HealthJournal.Data.Day do
 
   def filter(query, :id, id), do: where(query, [t], t.id == ^id)
   def filter(query, :user, user), do: where(query, [t], t.user_id == ^user.id)
+  def filter(query, :date, date), do: where(query, [t], t.date == ^date)
+  def filter(query, :order, :date_desc), do: order_by(query, [t], desc: t.date)
 end
