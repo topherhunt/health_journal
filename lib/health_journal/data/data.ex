@@ -1,21 +1,23 @@
 defmodule HealthJournal.Data do
   import Ecto.Query
   alias HealthJournal.Repo
-  alias HealthJournal.Data.{User, Nonce, LoginTry}
+  alias HealthJournal.Data.{Day, LoginTry, Nonce, User}
 
   #
   # Users
   #
 
-  def insert_user!(a \\ %User{}, b, c), do: insert_user(a, b, c) |> Repo.unwrap!()
   def insert_user(%User{} = struct \\ %User{}, params, scope) do
     struct |> User.changeset(params, scope) |> Repo.insert()
   end
 
-  def update_user!(a, b, c), do: update_user(a, b, c) |> Repo.unwrap!()
+  def insert_user!(a \\ %User{}, b, c), do: insert_user(a, b, c) |> Repo.unwrap!()
+
   def update_user(%User{} = struct, params, scope) do
     struct |> User.changeset(params, scope) |> Repo.update()
   end
+
+  def update_user!(a, b, c), do: update_user(a, b, c) |> Repo.unwrap!()
 
   def delete_user!(user), do: Repo.delete!(user)
 
@@ -107,4 +109,23 @@ defmodule HealthJournal.Data do
     |> where([t], t.email == ^email)
     |> Repo.delete_all()
   end
+
+  #
+  # Days
+  #
+
+  def insert_day(%Day{} = struct \\ %Day{}, params, scope) do
+    struct |> Day.changeset(params, scope) |> Repo.insert()
+  end
+
+  def insert_day!(a \\ %Day{}, b, c), do: insert_day(a, b, c) |> Repo.unwrap!()
+
+  def update_day(%Day{} = struct, params, scope) do
+    struct |> Day.changeset(params, scope) |> Repo.update()
+  end
+
+  def update_day!(a, b, c), do: update_day(a, b, c) |> Repo.unwrap!()
+
+  def delete_day!(day), do: Repo.delete!(day)
+
 end
