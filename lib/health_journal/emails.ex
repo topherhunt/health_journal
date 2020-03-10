@@ -39,7 +39,7 @@ defmodule HealthJournal.Emails do
 
   defp standard_email do
     new_email()
-    |> from({"HealthJournal", "noreply@worldviewjourneys.com"})
+    |> from({"HealthJournal", "health-journal-noreply@topherhunt.com"})
     |> put_html_layout({HealthJournalWeb.LayoutView, "email.html"})
   end
 end
