@@ -40,11 +40,15 @@
           <div class="col">
             <div class="u-card">
               <%= label f, :food, "Food & drink" %>
-              <%= textarea f, :food, class: "form-control", rows: 10, phx_debounce: 1000, phx_update: "ignore" %>
+              <%= textarea f, :food, class: "form-control", rows: 6, phx_debounce: 1000, phx_update: "ignore" %>
             </div>
             <div class="u-card">
               <%= label f, :vitamins, "Vitamins & medicine" %>
               <%= textarea f, :vitamins, class: "form-control", phx_debounce: 1000, phx_update: "ignore" %>
+            </div>
+            <div class="u-card">
+              <%= label f, :reflections, "Other reflections (achievements, social, growth, dreams, etc.)" %>
+              <%= textarea f, :reflections, class: "form-control", phx_debounce: 1000, phx_update: "ignore" %>
             </div>
           </div>
         </div>
@@ -86,6 +90,10 @@
           <div class="day-section--static">
             <div><strong>Vitamins & medicine</strong></div>
             <div><%= day.vitamins |> newlines_to_bullets() %></div>
+          </div>
+          <div class="day-section--static">
+            <div><strong>Other reflections (achievements, social, growth, dreams, etc.)</strong></div>
+            <div><%= day.reflections |> newlines_to_bullets() %></div>
           </div>
         </div>
       </div>

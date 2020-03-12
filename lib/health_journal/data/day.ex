@@ -13,12 +13,13 @@ defmodule HealthJournal.Data.Day do
     field :food, :string
     field :vitamins, :string
     field :exercise, :string
+    field :reflections, :string
     timestamps()
   end
 
   def changeset(struct, params, :owner) do
     struct
-    |> cast(params, [:sleep, :energy, :comfort, :food, :vitamins, :exercise])
+    |> cast(params, [:sleep, :energy, :comfort, :food, :vitamins, :exercise, :reflections])
     |> validate_required([:user_id, :date])
   end
 
