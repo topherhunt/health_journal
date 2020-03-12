@@ -11,12 +11,12 @@ defmodule HealthJournalWeb.JournalIndexLive do
   def mount(_params, %{"user_id" => user_id}, socket) do
     user = Repo.get!(Data.User, user_id)
     ensure_entry(user, Date.utc_today())
-    socket = assign(socket, user: user, changesets: %{})
+    socket = assign(socket, user: user, editing: %{date: nil, field: nil})
     socket = assign(socket, days: load_days(socket))
     {:ok, socket}
   end
 
-  def handle_event("add-date", %{"day" => %{"date" => date_str}}, socket) do
+  def handle_event("add-day", %{"day" => %{"date" => date_str}}, socket) do
     date = Date.from_iso8601!(date_str)
     ensure_entry(socket.assigns.user, date)
     days = load_days(socket)
@@ -24,31 +24,16 @@ defmodule HealthJournalWeb.JournalIndexLive do
     {:noreply, socket}
   end
 
-  def handle_event("edit-date", %{"date" => date_str}, socket) do
-    date = Date.from_iso8601!(date_str)
-    day = socket.assigns.days |> Enum.find(& &1.date == date)
-    changeset = Day.changeset(day, %{}, :owner)
-    changesets = socket.assigns.changesets |> Map.put(date, changeset)
-    socket = assign(socket, changesets: changesets)
+  def handle_event("set-editing", %{"date" => date, "field" => field}, socket) do
+    socket = assign(socket, editing: %{date: date, field: field})
     {:noreply, socket}
   end
 
-  def handle_event("close-edit-date", %{"date" => date_str}, socket) do
-    date = Date.from_iso8601!(date_str)
-    changesets = socket.assigns.changesets |> Map.delete(date)
-    socket = assign(socket, changesets: changesets)
-    {:noreply, socket}
-  end
-
-  def handle_event("update-date", %{"day" => day_params}, socket) do
+  def handle_event("update-day", %{"day" => day_params}, socket) do
     day_id = Map.fetch!(day_params, "id")
     day = Day.filter(user: socket.assigns.user, id: day_id) |> Repo.one!()
-    day = Data.update_day!(day, day_params, :owner)
-    # Update the changeset just to keep the state consistent.
-    # (But the form elements are phx-update="ignore" so this is a bit redundant.)
-    changeset = Day.changeset(day, %{}, :owner)
-    changesets = socket.assigns.changesets |> Map.put(day.date, changeset)
-    socket = assign(socket, days: load_days(socket), changesets: changesets)
+    Data.update_day!(day, day_params, :owner)
+    socket = assign(socket, days: load_days(socket))
     {:noreply, socket}
   end
 
