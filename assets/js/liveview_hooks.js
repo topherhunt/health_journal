@@ -8,4 +8,21 @@ Hooks.Autofocus = {
   }
 }
 
+Hooks.ShowNotification = {
+  mounted() {
+    let text = this.el.dataset.text
+    console.log("Issuing notification.")
+
+    if (Notification.permission === "granted") {
+      new Notification(text);
+    } else if (Notification.permission !== "denied") {
+      Notification.requestPermission().then(function(perm) {
+        if (perm === "granted") {
+          new Notification(text);
+        }
+      })
+    }
+  }
+}
+
 export default Hooks

@@ -1,3 +1,22 @@
+<div phx-update="ignore"><div id="enable-notifications-banner" class="alert alert-warning u-hidden">Heads-up: You need to enable browser notifications in order to get reminders. <a href="#" id="enable-notifications-link">Click here to enable.</a></div></div>
+
+<script type="text/javascript">
+  $(function(){
+    if (Notification.permission !== "granted") {
+      $('#enable-notifications-banner').show()
+    }
+
+    $('#enable-notifications-link').click(function(e){
+      e.preventDefault()
+      Notification.requestPermission().then(function(permission) {
+        if (permission === "granted") {
+          new Notification("Great, notifications are enabled!");
+        }
+      })
+    })
+  })
+</script>
+
 <div class="float-right">
   <%= f = form_for :day, "#", [phx_submit: "add-day"] %>
     <%= date_input f, :date, class: "form-control", style: "width: 11em; display: inline-block;" %>
@@ -29,3 +48,9 @@
     </form>
   </div>
 <% end %>
+
+<div class="u-hidden">
+  <%= for text <- @notifications do %>
+    <div phx-hook="ShowNotification" data-text="<%= text %>"></div>
+  <% end %>
+</div>
