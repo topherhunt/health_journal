@@ -3,13 +3,16 @@
   <%= if @editing.date == "#{@day.date}" && @editing.field == "#{@field}" do %>
     <%= f = form_for :day, "#", [class: "day-text-editing", phx_change: "update-day"] %>
       <%= hidden_input f, :id, value: @day.id %>
-      <a href="#" class="day-text-edit-cancel" phx-click="set-editing" phx-value-date="" phx-value-field="">X</a>
+      <%# <a href="#" class="day-text-edit-cancel" phx-click="set-editing" phx-value-date="" phx-value-field="">X</a> %>
       <%= textarea f, @field, class: "form-control",
         value: Map.get(@day, @field),
         rows: (Map.get(@day, @field) || "") |> String.split("\n") |> length(),
         phx_debounce: 200,
         phx_update: "ignore",
-        phx_hook: "Autofocus" %>
+        phx_hook: "Autofocus",
+        phx_blur: "set-editing",
+        phx_value_date: "",
+        phx_value_field: "" %>
     </form>
   <% else %>
     <div class="day-text-static" phx-click="set-editing" phx-value-date="<%= @day.date %>" phx-value-field="<%= @field %>"><%= Map.get(@day, @field) |> newlines_to_bullets() %></div>
