@@ -10,7 +10,8 @@
       e.preventDefault()
       Notification.requestPermission().then(function(permission) {
         if (permission === "granted") {
-          new Notification("Great, notifications are enabled!");
+          new Notification("Great, notifications are enabled!", {requireInteraction: false});
+          $('#enable-notifications-banner').hide(200)
         }
       })
     })

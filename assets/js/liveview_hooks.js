@@ -14,13 +14,8 @@ Hooks.ShowNotification = {
     console.log("Issuing notification.")
 
     if (Notification.permission === "granted") {
-      new Notification(text);
-    } else if (Notification.permission !== "denied") {
-      Notification.requestPermission().then(function(perm) {
-        if (perm === "granted") {
-          new Notification(text);
-        }
-      })
+      let opts = {body: text, requireInteraction: true}
+      new Notification("Update your Health Journal", opts);
     }
   }
 }
