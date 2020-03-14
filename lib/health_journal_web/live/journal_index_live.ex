@@ -23,7 +23,7 @@ defmodule HealthJournalWeb.JournalIndexLive do
   end
 
   def handle_info(:notify, socket) do
-    if hours_since_last_update(socket) >= 6 do
+    if hours_since_last_update(socket) >= 4 do
       Logger.info "#{__MODULE__}: Sending reminder notification."
       {:noreply, add_notification(socket, random_reminder_text())}
     else
